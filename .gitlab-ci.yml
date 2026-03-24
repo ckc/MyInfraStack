@@ -1,0 +1,14 @@
+stages:
+  - mirror
+mirror:
+  stage: mirror
+  image: alpine/git
+  script:
+    - mkdir -p ~/.ssh
+    - echo "$GITHUB_DEPLOY_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+    - git remote add github git@github.com:ORG/stack.git || true
+    - git push --mirror github
+  only:
+    - main

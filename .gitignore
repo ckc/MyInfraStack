@@ -1,0 +1,13 @@
+# backups and DB dumps
+/backups/
+*.sql
+*.sql.gz
+*.tar
+# secrets and keys
+*.key
+*.pem
+secrets/
+.env
+# local editor / OS
+.vscode/
+.DS_Store
