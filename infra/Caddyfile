@@ -1,0 +1,19 @@
+auth.ckc.dev.2u.hk {
+  # 將外部 HTTPS 代理到 Keycloak（強制 HTTP/1.1 upstream）
+  reverse_proxy keycloak:8080 {
+    transport http {
+      versions h1
+    }
+    header_up Host {host}
+    header_up X-Forwarded-Proto {scheme}
+  }
+
+  # 用你的 email 申請 Let's Encrypt 憑證
+  tls you@example.com
+
+  # 建議：限制 admin console 存取（若需要）
+  # route /admin/* {
+  #   @internalRemoteRemoteIP remote_ip 10.0.0.0/8 192.168.0.0/16
+  #   respond @internalRemoteRemoteIP 403
+  # }
+}
